@@ -18,17 +18,15 @@ namespace UpSkillDashboard.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Fetch total counts
             var totalUsers = await _context.Users.CountAsync();
             var totalWorkers = await _context.Workers.CountAsync();
             var totalClients = await _context.Clients.CountAsync();
             var totalOrganizations = await _context.Organizations.CountAsync();
             var totalProfitOrganizations = await _context.Organizations
-                .Where(o => o.OrganizationRole == "Profit") // Fixed: Replaced Type with OrganizationRole
+                .Where(o => o.OrganizationRole == "Profit")
                 .CountAsync();
-            var totalVolunteeringOrganizations = totalOrganizations - totalProfitOrganizations; // Fixed: Removed unnecessary "?? 0"
+            var totalVolunteeringOrganizations = totalOrganizations - totalProfitOrganizations; 
 
-            // Fetch recent signups
             var recentClients = await _context.Clients
                 .Include(c => c.User)
                 .OrderByDescending(c => c.CreatedDate)
@@ -47,7 +45,6 @@ namespace UpSkillDashboard.Controllers
                 .Take(5)
                 .ToListAsync();
 
-            // Pass data to the view
             ViewData["TotalUsers"] = totalUsers;
             ViewData["TotalWorkers"] = totalWorkers;
             ViewData["TotalClients"] = totalClients;
@@ -64,9 +61,8 @@ namespace UpSkillDashboard.Controllers
         [HttpGet]
         public async Task<JsonResult> GetGrowthChartData()
         {
-            var startDate = DateTime.UtcNow.AddMonths(-6); // Last 6 months
+            var startDate = DateTime.UtcNow.AddMonths(-6); 
 
-            // Monthly User Growth
             var userGrowth = await _context.Users
                 .Where(u => u.CreatedDate >= startDate)
                 .GroupBy(u => new { u.CreatedDate.Year, u.CreatedDate.Month })
@@ -77,7 +73,6 @@ namespace UpSkillDashboard.Controllers
                     Count = g.Count()
                 }).ToListAsync();
 
-            // Monthly Paid & Volunteering Job Growth
             var paidJobGrowth = await _context.PaidJobs
                 .Where(j => j.CreatedDate >= startDate)
                 .GroupBy(j => new { j.CreatedDate.Year, j.CreatedDate.Month })
