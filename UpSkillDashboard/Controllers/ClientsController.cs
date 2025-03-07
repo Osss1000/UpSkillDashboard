@@ -14,7 +14,6 @@ public class ClientsController : Controller
         _context = context;
     }
 
-    // LIST ALL CLIENTS
     public async Task<IActionResult> Index()
     {
         var clients = await _context.Clients.Include(c => c.User).ToListAsync();
