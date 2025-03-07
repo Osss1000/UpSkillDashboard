@@ -1,0 +1,59 @@
+﻿@model UpSkillDashboard.Models.Worker
+
+@{
+    ViewData["Title"] = "Edit Worker";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Edit Worker</h2>
+
+    <div class="card shadow p-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <input type="hidden" name="id" value="@Model.WorkerId" />
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input name="name" class="form-control shadow-sm" value="@Model.User.Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input name="email" type="email" class="form-control shadow-sm" value="@Model.User.Email" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Phone Number</label>
+                <input name="phoneNumber" class="form-control shadow-sm" value="@Model.User.PhoneNumber" required pattern="^\+?[0-9]{10,15}$" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">National ID</label>
+                <input name="nationalId" class="form-control shadow-sm" value="@Model.NationalId" pattern="\d{14}" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Profession</label>
+                <input name="profession" class="form-control shadow-sm" value="@Model.Profession" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Experience (Years)</label>
+                <input name="experience" type="number" min="0" max="100" class="form-control shadow-sm" value="@Model.Experience" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Hourly Rate</label>
+                <input name="hourlyRate" type="number" step="0.01" class="form-control shadow-sm" value="@Model.HourlyRate" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Address</label>
+                <input name="address" class="form-control shadow-sm" value="@Model.Address" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+        </form>
+    </div>
+</div>

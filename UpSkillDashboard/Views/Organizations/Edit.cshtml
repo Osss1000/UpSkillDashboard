@@ -1,0 +1,47 @@
+﻿@model UpSkillDashboard.Models.Organization
+
+@{
+    ViewData["Title"] = "Edit Organization";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Edit Organization</h2>
+
+    <div class="card shadow p-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <input type="hidden" name="id" value="@Model.OrganizationId" />
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input name="name" class="form-control shadow-sm" value="@Model.User.Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input name="email" type="email" class="form-control shadow-sm" value="@Model.User.Email" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Phone Number</label>
+                <input name="phoneNumber" class="form-control shadow-sm" value="@Model.User.PhoneNumber" required pattern="^\+?[0-9]{10,15}$" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Organization Name</label>
+                <input name="organizationName" class="form-control shadow-sm" value="@Model.Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Organization Type</label>
+                <select name="organizationType" class="form-select shadow-sm">
+                    <option value="Voluntary" selected="@(Model.OrganizationRole == "Voluntary")">Voluntary</option>
+                    <option value="For-Profit" selected="@(Model.OrganizationRole == "For-Profit")">For-Profit</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+        </form>
+    </div>
+</div>

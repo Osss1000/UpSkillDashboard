@@ -1,0 +1,41 @@
+﻿@model IEnumerable<UpSkillDashboard.Models.Organization>
+
+@{
+    ViewData["Title"] = "Organizations";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Organizations List</h2>
+
+    <a href="@Url.Action("Create")" class="btn btn-success mb-3">Add New Organization</a>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Organization Name</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var organization in Model)
+            {
+                <tr>
+                    <td>@organization.User.Name</td>
+                    <td>@organization.User.Email</td>
+                    <td>@organization.User.PhoneNumber</td>
+                    <td>@organization.Name</td>
+                    <td>@organization.OrganizationRole</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = organization.OrganizationId })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Details", new { id = organization.OrganizationId })" class="btn btn-info btn-sm">Details</a>
+                        <a href="@Url.Action("Delete", new { id = organization.OrganizationId })" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

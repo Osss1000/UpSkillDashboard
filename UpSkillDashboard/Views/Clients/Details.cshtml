@@ -1,0 +1,30 @@
+﻿@model UpSkillDashboard.Models.Client
+
+@{
+    ViewData["Title"] = "Client Details";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Client Details</h2>
+
+    <div class="card shadow p-4">
+        <div class="mb-3">
+            <strong>Name:</strong> @Model.User.Name
+        </div>
+        <div class="mb-3">
+            <strong>Email:</strong> @Model.User.Email
+        </div>
+        <div class="mb-3">
+            <strong>Phone Number:</strong> @Model.User.PhoneNumber
+        </div>
+        <div class="mb-3">
+            <strong>National ID:</strong> @Model.NationalId
+        </div>
+        <div class="mb-3">
+            <strong>Address:</strong> @Model.Address
+        </div>
+
+        <a href="@Url.Action("Edit", new { id = Model.ClientId })" class="btn btn-warning">Edit</a>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
