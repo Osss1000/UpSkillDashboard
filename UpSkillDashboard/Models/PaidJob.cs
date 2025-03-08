@@ -27,6 +27,8 @@ public partial class PaidJob
 
     public bool IsManuallyClosed { get; set; } = false;
 
+    //testbranch
+
     public string JobStatus =>
         IsManuallyClosed || WorkerApplications.Count(w => w.ApplicationStatus.Status == ApplicationStatusEnum.Approved) >= NumberOfPeopleNeeded
             ? "Closed"
