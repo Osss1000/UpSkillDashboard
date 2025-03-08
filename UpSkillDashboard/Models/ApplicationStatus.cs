@@ -18,7 +18,7 @@ public partial class ApplicationStatus
     public int ApplicationStatusId { get; set; }
 
     [Required(ErrorMessage = "Application status is required.")]
-    public string ApplicationStatusEnum { get; set; }
+    public ApplicationStatusEnum Status { get; set; } 
 
     [StringLength(255, ErrorMessage = "Description cannot exceed 255 characters.")]
     public string? Description { get; set; }

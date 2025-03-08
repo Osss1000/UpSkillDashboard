@@ -61,7 +61,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("SponsorId");
 
-                    b.ToTable("Advertisements");
+                    b.ToTable("Advertisements", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.ApplicationStatus", b =>
@@ -88,7 +88,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasKey("ApplicationStatusId");
 
-                    b.ToTable("ApplicationStatuses");
+                    b.ToTable("ApplicationStatuses", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Client", b =>
@@ -129,7 +129,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.ClientPost", b =>
@@ -181,7 +181,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientPosts");
+                    b.ToTable("ClientPosts", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Organization", b =>
@@ -220,7 +220,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Organizations");
+                    b.ToTable("Organizations", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.PaidJob", b =>
@@ -266,7 +266,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("PaidJobs");
+                    b.ToTable("PaidJobs", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Rating", b =>
@@ -302,7 +302,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Ratings", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Sponsor", b =>
@@ -335,7 +335,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasKey("SponsorId");
 
-                    b.ToTable("Sponsors");
+                    b.ToTable("Sponsors", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.User", b =>
@@ -375,7 +375,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.VolunteeringApplication", b =>
@@ -415,7 +415,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("VolunteeringJobId");
 
-                    b.ToTable("VolunteeringApplications");
+                    b.ToTable("VolunteeringApplications", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.VolunteeringJob", b =>
@@ -463,7 +463,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("VolunteeringJobs");
+                    b.ToTable("VolunteeringJobs", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Worker", b =>
@@ -518,7 +518,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Workers");
+                    b.ToTable("Workers", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.WorkerApplication", b =>
@@ -565,7 +565,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("WorkerApplications");
+                    b.ToTable("WorkerApplications", (string)null);
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Advertisement", b =>

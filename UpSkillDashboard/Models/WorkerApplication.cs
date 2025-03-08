@@ -27,7 +27,7 @@ public partial class WorkerApplication
 
     [Required]
     [StringLength(50, ErrorMessage = "Application Type cannot exceed 50 characters.")]
-    public string ApplicationType { get; set; } = null!; // "PaidJob" or "ClientPost"
+    public string ApplicationType { get; set; } = null!; 
 
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public DateTime? ModifiedDate { get; set; }
