@@ -1,0 +1,25 @@
+﻿@model UpSkillDashboard.Models.PaidJob
+
+@{
+    ViewData["Title"] = "Delete Job";
+}
+
+<div class="container px-4">
+    <h2 class="text-danger">Delete Job</h2>
+
+    <p>Are you sure you want to delete this job?</p>
+
+    <dl class="row">
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+
+        <dt class="col-sm-3">Organization</dt>
+        <dd class="col-sm-9">@Model.Organization.Name</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" name="id" value="@Model.PaidJobId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

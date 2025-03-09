@@ -1,0 +1,71 @@
+﻿@model UpSkillDashboard.Models.PaidJob
+
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">@Model.Title</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Organization</dt>
+        <dd class="col-sm-9">@Model.Organization.Name</dd>
+
+        <dt class="col-sm-3">Location</dt>
+        <dd class="col-sm-9">@Model.Location</dd>
+
+        <dt class="col-sm-3">Salary</dt>
+        <dd class="col-sm-9">@(Model.Price.HasValue ? $"${Model.Price}" : "N/A")</dd>
+
+        <dt class="col-sm-3">Needed</dt>
+        <dd class="col-sm-9">@Model.NumberOfPeopleNeeded</dd>
+
+        <dt class="col-sm-3">Created Date</dt>
+        <dd class="col-sm-9">@Model.CreatedDate.ToString("dd MMM yyyy")</dd>
+
+        <dt class="col-sm-3">Job Status</dt>
+        <dd class="col-sm-9"><strong>@ViewBag.JobStatus</strong></dd>
+    </dl>
+
+    <!-- Close/Reopen Job Buttons -->
+    @if (Model.IsManuallyClosed == false && ViewBag.JobStatus == "Open")
+    {
+        <form asp-action="CloseJob" method="post">
+            <input type="hidden" name="id" value="@Model.PaidJobId" />
+            <button type="submit" class="btn btn-danger">Close Job</button>
+        </form>
+    }
+    else if (Model.IsManuallyClosed == true)
+    {
+        <form asp-action="ReopenJob" method="post">
+            <input type="hidden" name="id" value="@Model.PaidJobId" />
+            <button type="submit" class="btn btn-success">Reopen Job</button>
+        </form>
+    }
+
+    <h3 class="mt-4">Worker Applications</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Worker Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model.WorkerApplications)
+            {
+                <tr>
+                    <td>@app.Worker.User.Name</td>
+                    <td>@app.Worker.User.Email</td>
+                    <td>@app.Worker.User.PhoneNumber</td>
+                    <td><strong>@app.ApplicationStatus.Status</strong></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("Index")" class="btn btn-secondary mt-3">Back to List</a>
+</div>
