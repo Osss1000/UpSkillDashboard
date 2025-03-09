@@ -61,7 +61,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("SponsorId");
 
-                    b.ToTable("Advertisements", (string)null);
+                    b.ToTable("Advertisements");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.ApplicationStatus", b =>
@@ -71,10 +71,6 @@ namespace UpSkillDashboard.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationStatusId"));
-
-                    b.Property<string>("ApplicationStatusEnum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -86,9 +82,12 @@ namespace UpSkillDashboard.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("ApplicationStatusId");
 
-                    b.ToTable("ApplicationStatuses", (string)null);
+                    b.ToTable("ApplicationStatuses");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Client", b =>
@@ -129,7 +128,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.ClientPost", b =>
@@ -181,7 +180,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientPosts", (string)null);
+                    b.ToTable("ClientPosts");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Organization", b =>
@@ -220,7 +219,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Organizations", (string)null);
+                    b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.PaidJob", b =>
@@ -240,6 +239,9 @@ namespace UpSkillDashboard.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsManuallyClosed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Location")
                         .HasMaxLength(200)
@@ -266,7 +268,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("PaidJobs", (string)null);
+                    b.ToTable("PaidJobs");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Rating", b =>
@@ -302,7 +304,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("Ratings", (string)null);
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Sponsor", b =>
@@ -335,7 +337,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasKey("SponsorId");
 
-                    b.ToTable("Sponsors", (string)null);
+                    b.ToTable("Sponsors");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.User", b =>
@@ -375,7 +377,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.VolunteeringApplication", b =>
@@ -415,7 +417,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("VolunteeringJobId");
 
-                    b.ToTable("VolunteeringApplications", (string)null);
+                    b.ToTable("VolunteeringApplications");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.VolunteeringJob", b =>
@@ -463,7 +465,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("VolunteeringJobs", (string)null);
+                    b.ToTable("VolunteeringJobs");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Worker", b =>
@@ -518,7 +520,7 @@ namespace UpSkillDashboard.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Workers", (string)null);
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.WorkerApplication", b =>
@@ -565,7 +567,7 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("WorkerId");
 
-                    b.ToTable("WorkerApplications", (string)null);
+                    b.ToTable("WorkerApplications");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Advertisement", b =>
