@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UpSkillDashboard.Data;
 
@@ -11,9 +12,11 @@ using UpSkillDashboard.Data;
 namespace UpSkillDashboard.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250310182310_UpdateVolunteeringApplication")]
+    partial class UpdateVolunteeringApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +43,6 @@ namespace UpSkillDashboard.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -57,8 +57,8 @@ namespace UpSkillDashboard.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("Value")
-                        .HasColumnType("int");
+                    b.Property<decimal?>("Value")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("AdvertisementId");
 
@@ -156,8 +156,8 @@ namespace UpSkillDashboard.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
-                        .HasMaxLength(2550)
-                        .HasColumnType("nvarchar(2550)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Location")
                         .HasMaxLength(200)
@@ -179,14 +179,9 @@ namespace UpSkillDashboard.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("ClientPostId");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ClientPosts");
                 });
@@ -330,12 +325,6 @@ namespace UpSkillDashboard.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -347,9 +336,6 @@ namespace UpSkillDashboard.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("SponsorId");
 
@@ -621,15 +607,7 @@ namespace UpSkillDashboard.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UpSkillDashboard.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Client");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Organization", b =>

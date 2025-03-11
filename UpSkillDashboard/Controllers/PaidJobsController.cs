@@ -19,6 +19,7 @@ public class PaidJobsController : Controller
     {
         var jobs = await _context.PaidJobs
             .Include(j => j.Organization) // Fetch organization details
+            .Where(j => j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit) // ✅ Enum comparison
             .ToListAsync();
 
         return View(jobs);
@@ -34,7 +35,7 @@ public class PaidJobsController : Controller
             .Include(j => j.WorkerApplications)
                 .ThenInclude(wa => wa.Worker)
                     .ThenInclude(w => w.User) // ✅ If you need user details (e.g., Name, Email)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id);
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit);
 
         if (job == null)
             return NotFound();
@@ -57,7 +58,7 @@ public class PaidJobsController : Controller
     {
         var job = await _context.PaidJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id);
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit);
 
         if (job == null)
             return NotFound();
@@ -71,7 +72,7 @@ public class PaidJobsController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var job = await _context.PaidJobs.FindAsync(id);
-        if (job == null) return NotFound();
+
 
         _context.PaidJobs.Remove(job);
         await _context.SaveChangesAsync();
@@ -83,8 +84,9 @@ public class PaidJobsController : Controller
     [HttpPost]
     public async Task<IActionResult> CloseJob(int id)
     {
-        var job = await _context.PaidJobs.FindAsync(id);
-        if (job == null) return NotFound();
+        var job = await _context.PaidJobs
+            .Include(j => j.Organization)
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
 
         job.IsManuallyClosed = true;
         _context.Update(job);
@@ -97,8 +99,9 @@ public class PaidJobsController : Controller
     [HttpPost]
     public async Task<IActionResult> ReopenJob(int id)
     {
-        var job = await _context.PaidJobs.FindAsync(id);
-        if (job == null) return NotFound();
+        var job = await _context.PaidJobs
+            .Include(j => j.Organization)
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
 
         job.IsManuallyClosed = false;
         _context.Update(job);

@@ -25,7 +25,7 @@ public class OrganizationsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string name, string email, string phoneNumber, string organizationName, string organizationType)
+    public async Task<IActionResult> Create(string name, string email, string phoneNumber, string organizationName, OrganizationRoleEnum organizationType)
     {
         if (!ModelState.IsValid)
         {

@@ -1,0 +1,52 @@
+﻿@model UpSkillDashboard.Models.ClientPost
+
+<h2>Client Post Details</h2>
+
+<table class="table">
+    <tr>
+        <th>Title:</th>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <th>Client:</th>
+        <td>@Model.Client.User.Name</td> <!-- ✅ Updated to include Client Name -->
+    </tr>
+    <tr>
+        <th>Location:</th>
+        <td>@Model.Location</td>
+    </tr>
+    <tr>
+        <th>Created Date:</th>
+        <td>@Model.CreatedDate.ToString("yyyy-MM-dd")</td>
+    </tr>
+</table>
+
+<h3>Worker Applications</h3>
+@if (Model.WorkerApplications.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Worker Name</th>
+                <th>Status</th>
+                <th>Applied On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model.WorkerApplications)
+            {
+                <tr>
+                    <td>@app.Worker.User.Name</td>
+                    <td>@app.ApplicationStatus.Status</td>
+                    <td>@app.ApplyDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No applications yet.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

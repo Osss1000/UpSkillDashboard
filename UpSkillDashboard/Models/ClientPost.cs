@@ -23,7 +23,7 @@ public partial class ClientPost
 
     public DateTime? DateAndTime { get; set; }
 
-    [StringLength(500, ErrorMessage = "Details cannot exceed 500 characters.")]
+    [StringLength(2550, ErrorMessage = "Details cannot exceed 500 characters.")]
     public string? Details { get; set; }
 
     [StringLength(200, ErrorMessage = "Location cannot exceed 200 characters.")]
@@ -35,10 +35,15 @@ public partial class ClientPost
     [Required(ErrorMessage = "Client ID is required.")]
     [ForeignKey("Client")]
     public int ClientId { get; set; }
+    [ForeignKey("User")]
+    public int UserId { get; set; }
+
 
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public DateTime? ModifiedDate { get; set; }
 
     public virtual Client Client { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
+
     public virtual ICollection<WorkerApplication> WorkerApplications { get; set; } = new List<WorkerApplication>();
 }

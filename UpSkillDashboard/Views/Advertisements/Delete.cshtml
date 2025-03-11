@@ -1,0 +1,31 @@
+﻿@model UpSkillDashboard.Models.Advertisement
+
+@{
+    ViewData["Title"] = "Delete Advertisement";
+}
+
+<h2>Confirm Delete</h2>
+
+<div class="alert alert-danger">
+    <strong>Are you sure you want to delete this advertisement?</strong>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Title</h4>
+        <p class="card-text">@Model.Description</p>
+        <ul>
+            <li><strong>Value:</strong> @Model.Value</li>
+            <li><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</li>
+            <li><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</li>
+            <li><strong>Sponsor:</strong> @Model.Sponsor.Name</li>
+            <li><strong>Active:</strong> @(Model.IsActive ? "Yes" : "No")</li>
+        </ul>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="AdvertisementId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" asp-route-sponsorId="@Model.SponsorId" class="btn btn-secondary">Cancel</a>
+</form>

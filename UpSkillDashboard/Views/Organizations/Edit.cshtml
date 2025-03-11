@@ -33,12 +33,9 @@
                 <input name="organizationName" class="form-control shadow-sm" value="@Model.Name" required />
             </div>
 
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Organization Type</label>
-                <select name="organizationType" class="form-select shadow-sm">
-                    <option value="Voluntary" selected="@(Model.OrganizationRole == "Voluntary")">Voluntary</option>
-                    <option value="For-Profit" selected="@(Model.OrganizationRole == "For-Profit")">For-Profit</option>
-                </select>
+            <div class="form-group">
+                <label asp-for="OrganizationRole">Organization Type</label>
+                <select asp-for="OrganizationRole" asp-items="Html.GetEnumSelectList<OrganizationRoleEnum>()" class="form-control"></select>
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Save Changes</button>

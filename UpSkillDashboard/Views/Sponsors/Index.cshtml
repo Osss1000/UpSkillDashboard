@@ -1,0 +1,83 @@
+﻿@model IEnumerable<UpSkillDashboard.Models.Sponsor>
+
+@{
+    ViewData["Title"] = "Sponsors";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Sponsors List</h2>
+
+    <!-- Filters Section -->
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="searchName" class="form-label">Search by Name</label>
+                <input type="text" name="searchName" class="form-control" value="@Context.Request.Query["searchName"]" />
+            </div>
+
+            <div class="col-md-3">
+                <label for="isActive" class="form-label">Status</label>
+                <select name="isActive" class="form-control">
+                    <option value="">All</option>
+                    <option value="true" selected="@(Context.Request.Query["isActive"] == "true" ? "selected" : null)">Active</option>
+                    <option value="false" selected="@(Context.Request.Query["isActive"] == "false" ? "selected" : null)">Inactive</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="startDate" class="form-label">Start Date From</label>
+                <input type="date" name="startDate" class="form-control" value="@Context.Request.Query["startDate"]" />
+            </div>
+
+            <div class="col-md-3">
+                <label for="endDate" class="form-label">End Date To</label>
+                <input type="date" name="endDate" class="form-control" value="@Context.Request.Query["endDate"]" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Search</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary mt-3">Reset</a>
+    </form>
+
+    <a href="@Url.Action("Create")" class="btn btn-success mb-3">Add New Sponsor</a>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sponsor in Model)
+            {
+                <tr>
+                    <td>@sponsor.Name</td>
+                    <td>@sponsor.Email</td>
+                    <td>@sponsor.PhoneNumber</td>
+                    <td>@sponsor.StartDate.ToShortDateString()</td>
+                    <td>@sponsor.EndDate.ToShortDateString()</td>
+                    <td>
+                        <span class="badge @(sponsor.IsActive ? "bg-success" : "bg-danger")">
+                            @(sponsor.IsActive ? "Active" : "Inactive")
+                        </span>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = sponsor.SponsorId })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Renew", new { id = sponsor.SponsorId })" class="btn btn-primary btn-sm">Renew</a>
+                        <a href="@Url.Action("ToggleStatus", new { id = sponsor.SponsorId })" class="btn btn-danger btn-sm">
+                            @(sponsor.IsActive ? "Deactivate" : "Reactivate")
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = sponsor.SponsorId })" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="@Url.Action("Index", "Advertisements", new { sponsorId = sponsor.SponsorId })" class="btn btn-info btn-sm">Posts</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

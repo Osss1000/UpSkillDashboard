@@ -1,0 +1,28 @@
+﻿@model IEnumerable<UpSkillDashboard.Models.VolunteeringJob>
+
+<h2>Volunteering Jobs</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Organization</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.Title</td>
+                <td>@job.Organization.Name</td>
+                <td>@job.Location</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@job.VolunteeringJobId" class="btn btn-info">View</a>
+                    <a asp-action="Delete" asp-route-id="@job.VolunteeringJobId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,8 +17,8 @@ public partial class Advertisement
     [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
     public string? Description { get; set; }
 
-    [Range(0, double.MaxValue, ErrorMessage = "Value cannot be negative.")]
-    public decimal? Value { get; set; }
+    [Range(1, 9999, ErrorMessage = "Value cannot be negative.")]
+    public int? Value { get; set; }
 
     [Required(ErrorMessage = "Start date is required.")]
     public DateTime StartDate { get; set; }
@@ -32,5 +33,7 @@ public partial class Advertisement
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public DateTime? ModifiedDate { get; set; }
 
+    public bool IsActive { get; set; } = true; // New field to track active/inactive status
+    [ValidateNever]
     public virtual Sponsor Sponsor { get; set; } = null!;
 }

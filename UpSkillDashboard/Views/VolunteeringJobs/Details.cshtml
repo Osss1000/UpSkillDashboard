@@ -1,0 +1,54 @@
+﻿@model UpSkillDashboard.Models.VolunteeringJob
+
+<h2>Volunteering Job Details</h2>
+
+<table class="table">
+    <tr>
+        <th>Title:</th>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <th>Organization:</th>
+        <td>@Model.Organization.Name</td>
+    </tr>
+    <tr>
+        <th>Location:</th>
+        <td>@Model.Location</td>
+    </tr>
+    <tr>
+        <th>Created Date:</th>
+        <td>@Model.CreatedDate.ToString("yyyy-MM-dd")</td>
+    </tr>
+</table>
+
+<h3>Volunteer Applications</h3>
+@if (Model.VolunteeringApplications.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Applicant Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Applied On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model.VolunteeringApplications)
+            {
+                <tr>
+                    <td>@(app.ApplicantType == ApplicantTypeEnum.Worker ? app.Worker?.User.Name : app.Client?.User.Name)</td>
+                    <td>@app.ApplicantType</td>
+                    <td>@app.ApplicationStatus.Status</td>
+                    <td>@app.ApplyDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No applications yet.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

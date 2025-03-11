@@ -5,6 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UpSkillDashboard.Models;
 
+public enum OrganizationRoleEnum
+{
+    ForProfit,
+    Voluntary
+}
+
 public partial class Organization
 {
     [Key]
@@ -18,7 +24,7 @@ public partial class Organization
     public string? DocumentationPath { get; set; }
 
     [Required(ErrorMessage = "Organization role is required.")]
-    public string OrganizationRole { get; set; } = null!;
+    public OrganizationRoleEnum OrganizationRole { get; set; }
 
     [Required(ErrorMessage = "User ID is required.")]
     [ForeignKey("User")]

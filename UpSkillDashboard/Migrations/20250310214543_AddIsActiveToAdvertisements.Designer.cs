@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UpSkillDashboard.Data;
 
@@ -11,9 +12,11 @@ using UpSkillDashboard.Data;
 namespace UpSkillDashboard.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250310214543_AddIsActiveToAdvertisements")]
+    partial class AddIsActiveToAdvertisements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +60,8 @@ namespace UpSkillDashboard.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("Value")
-                        .HasColumnType("int");
+                    b.Property<decimal?>("Value")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("AdvertisementId");
 
