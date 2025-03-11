@@ -1,0 +1,42 @@
+﻿@model UpSkillDashboard.Models.Sponsor
+
+@{
+    ViewData["Title"] = "Renew Sponsor";
+}
+
+<div class="container px-4">
+    <h2 class="text-primary">Renew Sponsor</h2>
+
+    <form asp-action="Renew" method="post">
+        <input type="hidden" asp-for="SponsorId" />
+        <input type="hidden" asp-for="StartDate" value="@DateTime.UtcNow" /> <!-- Ensure Start Date is Passed -->
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">New Start Date</label>
+            <input class="form-control" type="text" value="@DateTime.UtcNow.ToShortDateString()" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EndDate" class="form-label">New End Date</label>
+            <input asp-for="EndDate" class="form-control" type="date" required />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Renew Sponsor</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

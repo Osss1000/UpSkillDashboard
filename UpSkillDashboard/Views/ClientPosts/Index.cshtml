@@ -1,0 +1,28 @@
+﻿@model IEnumerable<UpSkillDashboard.Models.ClientPost>
+
+<h2>Client Posts</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Client</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.Client.User.Name</td> <!-- ✅ Updated to include Client Name -->
+                <td>@post.Location</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@post.ClientPostId" class="btn btn-info">View</a>
+                    <a asp-action="Delete" asp-route-id="@post.ClientPostId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

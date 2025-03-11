@@ -43,29 +43,40 @@
         </form>
     }
 
-    <h3 class="mt-4">Worker Applications</h3>
+    @if (Model.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit)
+    {
+        <h3 class="mt-4">Worker Applications</h3>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Worker Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var app in Model.WorkerApplications)
-            {
-                <tr>
-                    <td>@app.Worker.User.Name</td>
-                    <td>@app.Worker.User.Email</td>
-                    <td>@app.Worker.User.PhoneNumber</td>
-                    <td><strong>@app.ApplicationStatus.Status</strong></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        @if (Model.WorkerApplications.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Worker Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var app in Model.WorkerApplications)
+                    {
+                        <tr>
+                            <td>@app.Worker.User.Name</td>
+                            <td>@app.Worker.User.Email</td>
+                            <td>@app.Worker.User.PhoneNumber</td>
+                            <td><strong>@app.ApplicationStatus.Status</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No applications yet.</p>
+        }
+    }
+
 
     <a href="@Url.Action("Index")" class="btn btn-secondary mt-3">Back to List</a>
 </div>

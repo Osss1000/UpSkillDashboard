@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UpSkillDashboard.Models.Advertisement>
+
+@{
+    ViewData["Title"] = "Advertisements";
+}
+
+<h2>Advertisements List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Value</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ad in Model)
+        {
+            <tr>
+            <td>@ad.Title</td>
+            <td>@ad.Value</td>
+            <td>@ad.StartDate.ToShortDateString()</td>
+            <td>@ad.EndDate.ToShortDateString()</td>
+            <td>@(ad.IsActive ? "Yes" : "No")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@ad.AdvertisementId">Details</a> |
+                <a asp-action="Edit" asp-route-id="@ad.AdvertisementId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@ad.AdvertisementId">Delete</a>
+            </td>
+        </tr>
+        }
+</table>
+
+<a asp-action="Create" asp-route-sponsorId="@ViewBag.SponsorId" class="btn btn-primary">
+    Create New Advertisement
+</a>
