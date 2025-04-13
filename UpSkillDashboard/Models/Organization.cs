@@ -7,8 +7,8 @@ namespace UpSkillDashboard.Models;
 
 public enum OrganizationRoleEnum
 {
-    ForProfit,
-    Voluntary
+    ForProfit = 1 ,
+    Voluntary = 2 
 }
 
 public partial class Organization
