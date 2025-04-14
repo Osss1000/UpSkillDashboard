@@ -30,19 +30,19 @@ namespace UpSkillDashboard.Controllers
 
             var recentClients = await _context.Clients
                 .Include(c => c.User)
-                .OrderByDescending(c => c.CreatedDate)
+                .OrderByDescending(c => c.User.CreatedDate)
                 .Take(5)
                 .ToListAsync();
 
             var recentWorkers = await _context.Workers
                 .Include(w => w.User)
-                .OrderByDescending(w => w.CreatedDate)
+                .OrderByDescending(w => w.User.CreatedDate)
                 .Take(5)
                 .ToListAsync();
 
             var recentOrganizations = await _context.Organizations
                 .Include(o => o.User)
-                .OrderByDescending(o => o.CreatedDate)
+                .OrderByDescending(o => o.User.CreatedDate)
                 .Take(5)
                 .ToListAsync();
 

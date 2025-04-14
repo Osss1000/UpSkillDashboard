@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UpSkillDashboard.Data;
 
@@ -11,9 +12,11 @@ using UpSkillDashboard.Data;
 namespace UpSkillDashboard.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250413201813_KeepOnluCreateDateInUsersTable")]
+    partial class KeepOnluCreateDateInUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,24 +269,6 @@ namespace UpSkillDashboard.Migrations
                     b.ToTable("PaidJobs");
                 });
 
-            modelBuilder.Entity("UpSkillDashboard.Models.Profession", b =>
-                {
-                    b.Property<int>("ProfessionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfessionId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ProfessionId");
-
-                    b.ToTable("Professions");
-                });
-
             modelBuilder.Entity("UpSkillDashboard.Models.Rating", b =>
                 {
                     b.Property<int>("RatingId")
@@ -525,8 +510,10 @@ namespace UpSkillDashboard.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProfessionId")
-                        .HasColumnType("int");
+                    b.Property<string>("Profession")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -535,8 +522,6 @@ namespace UpSkillDashboard.Migrations
 
                     b.HasIndex("NationalId")
                         .IsUnique();
-
-                    b.HasIndex("ProfessionId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -725,19 +710,11 @@ namespace UpSkillDashboard.Migrations
 
             modelBuilder.Entity("UpSkillDashboard.Models.Worker", b =>
                 {
-                    b.HasOne("UpSkillDashboard.Models.Profession", "Profession")
-                        .WithMany("Workers")
-                        .HasForeignKey("ProfessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("UpSkillDashboard.Models.User", "User")
                         .WithOne("Worker")
                         .HasForeignKey("UpSkillDashboard.Models.Worker", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Profession");
 
                     b.Navigation("User");
                 });
@@ -804,11 +781,6 @@ namespace UpSkillDashboard.Migrations
             modelBuilder.Entity("UpSkillDashboard.Models.PaidJob", b =>
                 {
                     b.Navigation("WorkerApplications");
-                });
-
-            modelBuilder.Entity("UpSkillDashboard.Models.Profession", b =>
-                {
-                    b.Navigation("Workers");
                 });
 
             modelBuilder.Entity("UpSkillDashboard.Models.Sponsor", b =>

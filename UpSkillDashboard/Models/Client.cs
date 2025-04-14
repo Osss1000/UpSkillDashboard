@@ -20,9 +20,7 @@ public partial class Client
     [Required(ErrorMessage = "User ID is required.")]
     [ForeignKey("User")]
     public int UserId { get; set; }
-
-    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-    public DateTime? ModifiedDate { get; set; }
+    
     public string? Address { get; set; } 
 
 

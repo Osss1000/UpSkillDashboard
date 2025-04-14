@@ -35,7 +35,14 @@
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Profession</label>
-                <input name="profession" class="form-control shadow-sm" value="@Model.Profession" required />
+                <select name="professionId" class="form-control shadow-sm" required>
+                    <option disabled value="">-- Select Profession --</option>
+                    @foreach (var item in ViewBag.Professions as IEnumerable<SelectListItem>)
+                    {
+                        var selected = item.Value == Model.ProfessionId.ToString() ? "selected" : "";
+                        @:<option value="@item.Value" @selected>@item.Text</option>
+                    }
+                </select>
             </div>
 
             <div class="mb-3">

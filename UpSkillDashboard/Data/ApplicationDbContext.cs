@@ -12,6 +12,7 @@ namespace UpSkillDashboard.Data
 
         // ✅ تضمين جميع الجداول في قاعدة البيانات
         public virtual DbSet<User> Users { get; set; }
+        public DbSet<Profession> Professions { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }

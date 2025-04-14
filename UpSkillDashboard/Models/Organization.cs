@@ -30,8 +30,7 @@ public partial class Organization
     [ForeignKey("User")]
     public int UserId { get; set; }
 
-    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-    public DateTime? ModifiedDate { get; set; }
+
 
     public virtual ICollection<PaidJob> PaidJobs { get; set; } = new List<PaidJob>();
     public virtual User User { get; set; } = null!;
