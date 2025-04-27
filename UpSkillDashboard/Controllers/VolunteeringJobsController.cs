@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UpSkillDashboard.Data;
 using UpSkillDashboard.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class VolunteeringJobsController : Controller
 {
@@ -19,7 +19,7 @@ public class VolunteeringJobsController : Controller
     {
         var jobs = await _context.VolunteeringJobs
             .Include(j => j.Organization)
-            .Where(j => j.Organization.OrganizationRole == OrganizationRoleEnum.Voluntary)
+            .Where(j => j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary)
             .ToListAsync();
 
         return View(jobs);
@@ -36,7 +36,7 @@ public class VolunteeringJobsController : Controller
                 .ThenInclude(va => va.Worker)
             .Include(j => j.VolunteeringApplications)
                 .ThenInclude(va => va.Client)
-            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.Voluntary);
+            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary);
 
         if (job == null)
             return NotFound();
@@ -49,7 +49,7 @@ public class VolunteeringJobsController : Controller
     {
         var job = await _context.VolunteeringJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.Voluntary);
+            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary);
 
         if (job == null) return NotFound();
         return View(job);

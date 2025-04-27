@@ -43,7 +43,7 @@
         </form>
     }
 
-    @if (Model.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit)
+    @if (Model.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit)
     {
         <h3 class="mt-4">Worker Applications</h3>
 

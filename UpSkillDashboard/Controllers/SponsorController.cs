@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UpSkillDashboard.Models;
+﻿using System;
 using System.Linq;
-using System;
+using Microsoft.AspNetCore.Mvc;
 using UpSkillDashboard.Data;
+using UpSkillDashboard.Models;
 
 namespace UpSkillDashboard.Controllers
 {

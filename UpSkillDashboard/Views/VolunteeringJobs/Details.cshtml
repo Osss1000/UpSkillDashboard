@@ -37,7 +37,7 @@
             @foreach (var app in Model.VolunteeringApplications)
             {
                 <tr>
-                    <td>@(app.ApplicantType == ApplicantTypeEnum.Worker ? app.Worker?.User.Name : app.Client?.User.Name)</td>
+                    <td>@(app.ApplicantType == (int)ApplicantTypeEnum.Worker ? app.Worker?.User.Name : app.Client?.User.Name)</td>
                     <td>@app.ApplicantType</td>
                     <td>@app.ApplicationStatus.Status</td>
                     <td>@app.ApplyDate.ToString("yyyy-MM-dd")</td>

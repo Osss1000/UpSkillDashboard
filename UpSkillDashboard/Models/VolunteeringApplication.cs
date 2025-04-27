@@ -1,47 +1,44 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
-namespace UpSkillDashboard.Models
+namespace UpSkillDashboard.Models;
+public enum ApplicantTypeEnum
 {
-    public enum ApplicantTypeEnum
+    Worker = 1,
+    Client = 2
+}
+
+public partial class VolunteeringApplication
+{
+    public int VolunteeringApplicationId { get; set; }
+
+    public DateTime ApplyDate { get; set; }
+
+    public int VolunteeringJobId { get; set; }
+
+    public int ApplicationStatusId { get; set; }
+
+    public DateTime CreatedDate { get; set; }
+
+    public DateTime? ModifiedDate { get; set; }
+    
+    public int ApplicantType { get; set; }
+
+    public ApplicantTypeEnum ApplicantTypeEnum
     {
-        Client,
-        Worker
+        get => (ApplicantTypeEnum)ApplicantType;
+        set => ApplicantType = (int)value;
     }
 
-    public partial class VolunteeringApplication
-    {
-        [Key]
-        public int VolunteeringApplicationId { get; set; }
+    public int? ClientId { get; set; }
 
-        public DateTime ApplyDate { get; set; } = DateTime.UtcNow;
+    public int? WorkerId { get; set; }
 
-        [Required]
-        [ForeignKey("VolunteeringJob")]
-        public int VolunteeringJobId { get; set; }
+    public virtual ApplicationStatus ApplicationStatus { get; set; } = null!;
 
-        [Required]
-        public ApplicantTypeEnum ApplicantType { get; set; }  // ✅ Now using Enum instead of string
+    public virtual Client? Client { get; set; }
 
-        // ✅ Separate Foreign Keys for Worker & Client
-        [ForeignKey("Worker")]
-        public int? WorkerId { get; set; }
+    public virtual VolunteeringJob VolunteeringJob { get; set; } = null!;
 
-        [ForeignKey("Client")]
-        public int? ClientId { get; set; }
-
-        [Required]
-        [ForeignKey("ApplicationStatus")]
-        public int ApplicationStatusId { get; set; }
-
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-        public DateTime? ModifiedDate { get; set; }
-
-        // ✅ Navigation Properties
-        public virtual ApplicationStatus ApplicationStatus { get; set; } = null!;
-        public virtual VolunteeringJob VolunteeringJob { get; set; } = null!;
-        public virtual Worker? Worker { get; set; }
-        public virtual Client? Client { get; set; }
-    }
+    public virtual Worker? Worker { get; set; }
 }

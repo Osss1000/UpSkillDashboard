@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UpSkillDashboard.Data;
 using UpSkillDashboard.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class PaidJobsController : Controller
 {
@@ -19,7 +19,7 @@ public class PaidJobsController : Controller
     {
         var jobs = await _context.PaidJobs
             .Include(j => j.Organization) // Fetch organization details
-            .Where(j => j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit) // ✅ Enum comparison
+            .Where(j => j.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit) // ✅ Enum comparison
             .ToListAsync();
 
         return View(jobs);
@@ -35,14 +35,14 @@ public class PaidJobsController : Controller
             .Include(j => j.WorkerApplications)
                 .ThenInclude(wa => wa.Worker)
                     .ThenInclude(w => w.User) // ✅ If you need user details (e.g., Name, Email)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit);
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit);
 
         if (job == null)
             return NotFound();
 
         // ✅ Fetch approved applications count directly from the DB
         int approvedApplicationsCount = await _context.WorkerApplications
-            .Where(w => w.PaidJobId == id && w.ApplicationStatus.Status == ApplicationStatusEnum.Approved)
+            .Where(w => w.PaidJobId == id && w.ApplicationStatus.Status == (int)ApplicationStatusEnum.Approved)
             .CountAsync();
 
         // ✅ Determine job status
@@ -58,7 +58,7 @@ public class PaidJobsController : Controller
     {
         var job = await _context.PaidJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit);
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit);
 
         if (job == null)
             return NotFound();
@@ -86,7 +86,7 @@ public class PaidJobsController : Controller
     {
         var job = await _context.PaidJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
 
         job.IsManuallyClosed = true;
         _context.Update(job);
@@ -101,7 +101,7 @@ public class PaidJobsController : Controller
     {
         var job = await _context.PaidJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
+            .FirstOrDefaultAsync(j => j.PaidJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.ForProfit); if (job == null) return NotFound(); if (job == null) return NotFound();
 
         job.IsManuallyClosed = false;
         _context.Update(job);

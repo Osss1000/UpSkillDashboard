@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UpSkillDashboard.Data;
 using UpSkillDashboard.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class ClientPostsController : Controller
 {

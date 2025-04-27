@@ -1,18 +1,15 @@
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace UpSkillDashboard.Models
+namespace UpSkillDashboard.Models;
+
+public partial class Profession
 {
-    public class Profession
-    {
-        public int ProfessionId { get; set; }
+    public int ProfessionId { get; set; }
 
-        [Required(ErrorMessage = "Profession is required.")]
-        [StringLength(50, ErrorMessage = "Profession cannot exceed 50 characters.")]
-        public string? Name { get; set; }  // ✅ Applied validations here
+    public string Name { get; set; } = null!;
 
-        public ICollection<Worker> Workers { get; set; } = new List<Worker>();
+    public virtual ICollection<ClientPost> ClientPosts { get; set; } = new List<ClientPost>();
 
-        // Optional: Add image path or category type if needed later
-    }
+    public virtual ICollection<Worker> Workers { get; set; } = new List<Worker>();
 }

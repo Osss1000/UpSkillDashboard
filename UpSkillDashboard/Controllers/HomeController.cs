@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UpSkillDashboard.Data;
 using UpSkillDashboard.Models;
 
@@ -24,7 +24,7 @@ namespace UpSkillDashboard.Controllers
             var totalClients = await _context.Clients.CountAsync();
             var totalOrganizations = await _context.Organizations.CountAsync();
             var totalProfitOrganizations = await _context.Organizations
-                .Where(o => o.OrganizationRole == OrganizationRoleEnum.ForProfit)
+                .Where(o => o.OrganizationRole == (int)OrganizationRoleEnum.ForProfit)
                 .CountAsync();
             var totalVolunteeringOrganizations = totalOrganizations - totalProfitOrganizations; 
 
