@@ -20,9 +20,6 @@
         <div class="mb-3">
             <strong>Organization Name:</strong> @Model.Name
         </div>
-        <div class="mb-3">
-            <strong>Organization Type:</strong> @Model.OrganizationRole
-        </div>
 
         <a href="@Url.Action("Edit", new { id = Model.OrganizationId })" class="btn btn-warning">Edit</a>
         <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>

@@ -25,7 +25,6 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Organization> Organizations { get; set; }
 
-    public virtual DbSet<PaidJob> PaidJobs { get; set; }
 
     public virtual DbSet<PostStatus> PostStatuses { get; set; }
 
@@ -115,26 +114,7 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey<Organization>(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });
-
-        modelBuilder.Entity<PaidJob>(entity =>
-        {
-            entity.HasIndex(e => e.OrganizationId, "IX_PaidJobs_OrganizationId");
-
-            entity.HasIndex(e => e.PostStatusId, "IX_PaidJobs_PostStatusId");
-
-            entity.Property(e => e.Description).HasMaxLength(500);
-            entity.Property(e => e.Location).HasMaxLength(200);
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.Title).HasMaxLength(100);
-
-            entity.HasOne(d => d.Organization).WithMany(p => p.PaidJobs)
-                .HasForeignKey(d => d.OrganizationId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            entity.HasOne(d => d.PostStatus).WithMany(p => p.PaidJobs)
-                .HasForeignKey(d => d.PostStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-        });
+        
 
         modelBuilder.Entity<PostStatus>(entity =>
         {
@@ -232,9 +212,7 @@ public partial class ApplicationDbContext : DbContext
             entity.HasIndex(e => e.ApplicationStatusId, "IX_WorkerApplications_ApplicationStatusId");
 
             entity.HasIndex(e => e.ClientPostId, "IX_WorkerApplications_ClientPostId");
-
-            entity.HasIndex(e => e.PaidJobId, "IX_WorkerApplications_PaidJobId");
-
+            
             entity.HasIndex(e => e.WorkerId, "IX_WorkerApplications_WorkerId");
 
             entity.HasOne(d => d.ApplicationStatus).WithMany(p => p.WorkerApplications)
@@ -242,9 +220,7 @@ public partial class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             entity.HasOne(d => d.ClientPost).WithMany(p => p.WorkerApplications).HasForeignKey(d => d.ClientPostId);
-
-            entity.HasOne(d => d.PaidJob).WithMany(p => p.WorkerApplications).HasForeignKey(d => d.PaidJobId);
-
+            
             entity.HasOne(d => d.Worker).WithMany(p => p.WorkerApplications)
                 .HasForeignKey(d => d.WorkerId)
                 .OnDelete(DeleteBehavior.ClientSetNull);

@@ -19,7 +19,6 @@ public class VolunteeringJobsController : Controller
     {
         var jobs = await _context.VolunteeringJobs
             .Include(j => j.Organization)
-            .Where(j => j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary)
             .ToListAsync();
 
         return View(jobs);
@@ -36,7 +35,7 @@ public class VolunteeringJobsController : Controller
                 .ThenInclude(va => va.Worker)
             .Include(j => j.VolunteeringApplications)
                 .ThenInclude(va => va.Client)
-            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary);
+            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id );
 
         if (job == null)
             return NotFound();
@@ -49,7 +48,7 @@ public class VolunteeringJobsController : Controller
     {
         var job = await _context.VolunteeringJobs
             .Include(j => j.Organization)
-            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id && j.Organization.OrganizationRole == (int)OrganizationRoleEnum.Voluntary);
+            .FirstOrDefaultAsync(j => j.VolunteeringJobId == id );
 
         if (job == null) return NotFound();
         return View(job);

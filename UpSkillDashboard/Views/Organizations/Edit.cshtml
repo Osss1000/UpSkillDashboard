@@ -33,11 +33,6 @@
                 <input name="organizationName" class="form-control shadow-sm" value="@Model.Name" required />
             </div>
 
-            <div class="form-group">
-                <label asp-for="OrganizationRole">Organization Type</label>
-                <select asp-for="OrganizationRole" asp-items="Html.GetEnumSelectList<OrganizationRoleEnum>()" class="form-control"></select>
-            </div>
-
             <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
         </form>
     </div>

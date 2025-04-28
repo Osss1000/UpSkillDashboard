@@ -16,15 +16,11 @@ public partial class Organization
     public string? Description { get; set; }
 
     public string? DocumentationPath { get; set; }
-
-    public int OrganizationRole { get; set; }
-
+    
     public int UserId { get; set; }
 
     public string? Name { get; set; }
-
-    public virtual ICollection<PaidJob> PaidJobs { get; set; } = new List<PaidJob>();
-
+    
     public virtual User User { get; set; } = null!;
 
     public virtual ICollection<VolunteeringJob> VolunteeringJobs { get; set; } = new List<VolunteeringJob>();

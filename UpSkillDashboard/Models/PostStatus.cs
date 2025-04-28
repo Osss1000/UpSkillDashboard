@@ -12,8 +12,6 @@ public partial class PostStatus
     public string? Description { get; set; }
 
     public virtual ICollection<ClientPost> ClientPosts { get; set; } = new List<ClientPost>();
-
-    public virtual ICollection<PaidJob> PaidJobs { get; set; } = new List<PaidJob>();
-
+    
     public virtual ICollection<VolunteeringJob> VolunteeringJobs { get; set; } = new List<VolunteeringJob>();
 }

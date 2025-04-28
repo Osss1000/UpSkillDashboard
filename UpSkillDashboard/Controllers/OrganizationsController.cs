@@ -47,7 +47,6 @@ public class OrganizationsController : Controller
         {
             UserId = user.UserId,
             Name = organizationName,
-            OrganizationRole = (int)organizationType
         };
 
         _context.Organizations.Add(organization);

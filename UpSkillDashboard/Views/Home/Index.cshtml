@@ -30,16 +30,6 @@
                 <div class="card-body">Organizations: @ViewData["TotalOrganizations"]</div>
             </div>
         </div>
-        <div class="col-xl-6 col-md-6">
-            <div class="card bg-info text-white mb-4">
-                <div class="card-body">Profit Organizations: @ViewData["TotalProfitOrganizations"]</div>
-            </div>
-        </div>
-        <div class="col-xl-6 col-md-6">
-            <div class="card bg-secondary text-white mb-4">
-                <div class="card-body">Volunteering Organizations: @ViewData["TotalVolunteeringOrganizations"]</div>
-            </div>
-        </div>
     </div>
 
     <!-- Growth Charts -->
@@ -142,13 +132,6 @@
                 data: {
                     labels: jobLabels,
                     datasets: [
-                        {
-                            label: "Paid Jobs",
-                            data: paidJobCounts,
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
                         {
                             label: "Volunteer Jobs",
                             data: volunteerJobCounts,
