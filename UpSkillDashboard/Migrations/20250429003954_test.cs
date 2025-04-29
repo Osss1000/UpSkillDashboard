@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UpSkillDashboard.Migrations
 {
-    /// <inheritdoc />
     public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
