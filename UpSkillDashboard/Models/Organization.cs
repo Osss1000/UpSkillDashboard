@@ -15,11 +15,10 @@ public partial class Organization
 
     public string? Description { get; set; }
 
-    public string? DocumentationPath { get; set; }
+    public string CommercialRecordPath { get; internal set; }
     
     public int UserId { get; set; }
 
-    public string? Name { get; set; }
     
     public virtual User User { get; set; } = null!;
 

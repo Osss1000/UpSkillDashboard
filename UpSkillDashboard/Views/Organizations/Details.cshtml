@@ -18,7 +18,7 @@
             <strong>Phone Number:</strong> @Model.User.PhoneNumber
         </div>
         <div class="mb-3">
-            <strong>Organization Name:</strong> @Model.Name
+            <strong>Organization Name:</strong> @Model.User.Name
         </div>
 
         <a href="@Url.Action("Edit", new { id = Model.OrganizationId })" class="btn btn-warning">Edit</a>

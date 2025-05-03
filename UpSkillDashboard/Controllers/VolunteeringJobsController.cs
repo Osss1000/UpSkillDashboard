@@ -19,6 +19,7 @@ public class VolunteeringJobsController : Controller
     {
         var jobs = await _context.VolunteeringJobs
             .Include(j => j.Organization)
+            .ThenInclude(p=>p.User)
             .ToListAsync();
 
         return View(jobs);

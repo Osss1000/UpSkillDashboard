@@ -16,7 +16,7 @@
         {
             <tr>
                 <td>@job.Title</td>
-                <td>@job.Organization.Name</td>
+                <td>@(job.Organization?.User?.Name ?? "N/A")</td>
                 <td>@job.Location</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@job.VolunteeringJobId" class="btn btn-info">View</a>
